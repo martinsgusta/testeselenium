@@ -1,0 +1,127 @@
+{
+  "relatorio_testes": {
+    "resumo_executivo": {
+      "total_testes": 8,
+      "testes_aprovados": 3,
+      "testes_reprovados": 5,
+      "taxa_sucesso": 37.5,
+      "status_geral": "REPROVADO"
+    },
+    "metricas_por_modulo": {
+      "login": {
+        "total": 4,
+        "aprovados": 2,
+        "reprovados": 2,
+        "taxa_sucesso": 50
+      },
+      "cadastro": {
+        "total": 4,
+        "aprovados": 1,
+        "reprovados": 3,
+        "taxa_sucesso": 25
+      }
+    },
+    "detalhamento_testes": {
+      "login": {
+        "aprovados": [
+          {
+            "nome_teste": "login_Login_com_senha_incorreta",
+            "descricao": "Login com senha incorreta",
+            "email": "usuario.valido@email.com",
+            "senha": "senha-errada",
+            "mensagem": "Nenhuma conta encontrada com esse email.",
+            "status": "pass"
+          },
+          {
+            "nome_teste": "login_Login_com_email_nao_cadastrado",
+            "descricao": "Login com email nao cadastrado",
+            "email": "nao.existe@email.com",
+            "senha": "senha123",
+            "mensagem": "Nenhuma conta encontrada com esse email.",
+            "status": "pass"
+          }
+        ],
+        "reprovados": [
+          {
+            "nome_teste": "login_Login_com_credenciais_validas",
+            "descricao": "Login com credenciais validas",
+            "email": "usuario.valido@email.com",
+            "senha": "senha123",
+            "erro": "TimeoutError: Waiting for URL to contain \"homepage.php\"\nWait timed out after 10004ms",
+            "status": "fail"
+          },
+          {
+            "nome_teste": "login_Login_com_campos_vazios",
+            "descricao": "Login com campos vazios",
+            "email": "",
+            "senha": "",
+            "erro": "Mensagem não capturada",
+            "status": "fail"
+          }
+        ]
+      },
+      "cadastro": {
+        "aprovados": [
+          {
+            "nome_teste": "cadastro_Cadastro_com_dados_validos_e_unicos",
+            "descricao": "Cadastro com dados validos e unicos",
+            "nome": "Usuario Teste Valido",
+            "email": "teste.1759860498424@email.com",
+            "senha": "senha123",
+            "mensagem": "Cadastro bem-sucedido e redirecionado para a homepage.",
+            "status": "pass"
+          }
+        ],
+        "reprovados": [
+          {
+            "nome_teste": "cadastro_Cadastro_com_email_ja_existente",
+            "descricao": "Cadastro com email ja existente",
+            "nome": "Usuario Existente",
+            "email": "teste.existente@email.com",
+            "senha": "senha123",
+            "erro": "TimeoutError: Waiting for element to be located By(css selector, *[id=\"mensagem\"])\nWait timed out after 10040ms",
+            "status": "fail"
+          },
+          {
+            "nome_teste": "cadastro_Cadastro_com_senhas_que_nao_coincidem",
+            "descricao": "Cadastro com senhas que nao coincidem",
+            "nome": "Usuario Senha Diferente",
+            "email": "teste.1759860498425@email.com",
+            "senha": "senha123",
+            "confirma_senha": "senha-diferente",
+            "erro": "UnexpectedAlertOpenError: unexpected alert open: {Alert text : As senhas não coincidem!}\n  (Session info: chrome=141.0.7390.55)",
+            "status": "fail"
+          },
+          {
+            "nome_teste": "cadastro_Cadastro_com_campos_vazios",
+            "descricao": "Cadastro com campos vazios",
+            "nome": "",
+            "email": "",
+            "senha": "",
+            "erro": "Mensagem não capturada",
+            "status": "fail"
+          }
+        ]
+      }
+    },
+    "problemas_identificados": {
+      "inconsistencias_codigo_teste": [
+        "Teste espera homepage.php mas sistema redireciona para painel.php",
+        "Elemento com id 'mensagem' não existe no código"
+      ],
+      "problemas_selenium": [
+        "Timeouts insuficientes para SweetAlert",
+        "Tratamento inadequado de alertas JavaScript"
+      ],
+      "validacao_campos": [
+        "Campos vazios não retornam mensagens consistentes"
+      ]
+    },
+    "recomendacoes": [
+      "Corrigir expectativas dos testes (painel.php vs homepage.php)",
+      "Ajustar timeouts para SweetAlert",
+      "Implementar tratamento de alertas JavaScript",
+      "Revisar seletores dos elementos de mensagem"
+    ]
+  }
+}
